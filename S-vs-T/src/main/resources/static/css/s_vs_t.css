@@ -1,0 +1,18 @@
+/* for preLoader*/
+.preLoader{
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+z-index:9999;
+background:url(../images/pre-loader.gif)50% no-repeat #fff
+
+
+}
+
+#homeTitle{
+text-color:blue;
+}
+
+
