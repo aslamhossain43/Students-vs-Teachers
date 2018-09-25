@@ -7,18 +7,18 @@ case 'About':
 case 'Login':
 	$('#login').addClass('active');
 	break;
-case 'Registration':
-	$('#registration').addClass('active');
+case 'Signup':
+	$('#signup').addClass('active');
 	break;
 	
-case 'addme':
+case 'Addme':
 	$('#addme').addClass('active');
 	break;
 	
-case 'lookteachers':
+case 'Look-teachers':
 	$('#lookteachers').addClass('active');
 	break;
-case 'manage':
+case 'Manage':
 	$('#manage').addClass('active');
 	break;
 

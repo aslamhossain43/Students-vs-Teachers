@@ -11,8 +11,11 @@ background:url(../images/pre-loader.gif)50% no-repeat #fff
 
 }
 
-#homeTitle{
-text-color:blue;
+#generalText{
+
+text-align:center;
+ color: rgb(241,90,36);
+letter-spacing:2px;
+word-spacing:3px;
+
 }
-
-
