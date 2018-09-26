@@ -34,20 +34,20 @@
                  <ul class="nav navbar-nav navbar-right">
                 <!-- by using this after login this part will be vanish -->
               
-                <li id="signup"><a th:href="@{/signup}">Sign Up</a></li>
-                <li id="login"><a th:href="@{/login}">Login</a></li>
+                <li id="signup"><a th:href="@{/showsignup}" sec:authorize="isAnonymous()">Sign Up</a></li>
+                <li id="login"><a th:href="@{/login}" sec:authorize="isAnonymous()">Login</a></li>
             
                
                <li class="dropdown">
-                <div> 
-               <a class="btn btn-warning dropdown-toggle"
-                data-toggle="dropdown">
+                <div th:each="authority:${authorityObject}"  sec:authorize="isAuthenticated()"> 
+               <a class="btn btn-warning dropdown-toggle" href="javascript:void(0)"
+                data-toggle="dropdown" th:text=" ${authority.getFirstName()+' '+authority.getLastName()}">
               <span class="caret"></span>
                
                </a>
                <ul class="dropdown-menu">
                <li>
-              <a class="btn btn-warning">Log out</a>
+              <a  th:href="@{/logout}" class="btn btn-warning" th:text="'Log out ( '+${authority.getUsername()}+' )'"></a>
                </li>
                
                </ul>

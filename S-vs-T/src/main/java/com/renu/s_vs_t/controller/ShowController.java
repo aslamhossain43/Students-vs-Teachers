@@ -39,20 +39,6 @@ public String showManage(Model model) {
 return "manage";	
 }
 	
-@RequestMapping(value="/signup")
-public String showSignup(Model model) {
-	LOGGER.info("From class ShowController,method : showSignup()");
-	model.addAttribute("title", "Signup");
-return "signup";	
-}
-	
-@RequestMapping(value="/login")
-public String showLogin(Model model) {
-	LOGGER.info("From class ShowController,method : showLogin()");
-	model.addAttribute("title", "Login");
-return "login";	
-}
-	
 	
 	
 	
