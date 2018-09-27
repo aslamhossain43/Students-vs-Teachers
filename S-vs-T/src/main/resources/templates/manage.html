@@ -1,29 +1,225 @@
-
 <!DOCTYPE html>
-
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/header-css :: header-css"></head>
+	<head th:replace="fragments/header-css :: header-css"></head>
 
-<body>
-<div class="preLoader">	</div> 
-<div th:replace="fragments/nav-bar :: nav-bar"></div>
 	
-	<div class="container-fluid">
-		<div class="row">
-		  <div class=" col-sm-8 col-sm-offset-2  col-md-8 col-md-offset-2  col-lg-8 col-lg-offset-2 ">
-         <br><br><br><br><br><br><br>
-		<p id="generalText">
-			MANAGE
-			 
-			</p>	
-				
-			
-				 
-		</div>	
-		</div>
-	</div>
+	<body>
+	
+	
+<div class="preLoader">	</div> 
+	<div th:replace="fragments/nav-bar :: nav-bar"></div>
+
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 col-sm-offset-1  col-md-10 col-md-offset-1  col-lg-10 col-lg-offset-1">
+
+<br><br><br><br>
+<div th:if="${message}">
+<div class="row">
+<div class=" col-sm-8 col-sm-offset-2  col-md-8 col-md-offset-2  col-lg-8 col-lg-offset-2 ">
+<div id="textCenter" class="alert alert-info fade in" th:text="${message}"></div>
+</div>
+</div>
+</div>
+<br>
+
+<fieldset>
+<div class="row">
+<div class=" col-sm-4 col-sm-offset-4  col-md-4 col-md-offset-4  col-lg-4 col-lg-offset-4 ">
+<h3 id="textCenter"><i>Manage Job Types</i></h3>
+</div>
+</div>
+
+<form  class="form-horizontal" role="form" th:action="@{/addJobType}" 
+th:object="${managejobtype}" method="post">
+
+
+
+
+
+<div class="form-group">
+<label for="id" class="col-sm-4 col-md-4 col-lg-4 control-label"></label>
+<div class="col-sm-4 col-md-4 col-lg-4">
+<input type="hidden" class="form-control" id="id" th:field="*{id}" th:value="${managejobtype.id}">
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="createdDate" class="col-sm-4 col-md-4 col-lg-4 control-label"></label>
+<div class="col-sm-4 col-md-4 col-lg-4">
+<input type="hidden" class="form-control" id="createdDate" th:field="*{createdDate}" th:value="${managejobtype.createdDate}">
+</div>
+</div>
+
+
+
+
+<div class="form-group">
+<label for="managejobtype" class="col-sm-4 col-md-4 col-lg-4 control-label">Enter a job type : </label>
+<div class="col-sm-4 col-md-4 col-lg-4">
+<input type="text" class="form-control" id="managejobtype"  th:field="*{jobType}" 
+th:value="${managejobtype.jobType}" placeholder="Enter a job type" autocomplete="off">
+<p th:if="${#fields.hasErrors('jobType')}" th:errors="*{jobType}"></p>
+
+</div>
+</div>
+
+
+
+<div class="forn-group">
+<div class="col-sm-2 col-sm-offset-5  col-md-2 col-md-offset-5  col-lg-2 col-lg-offset-5">
+<button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</div>
+
+</form>
+
+
+
+
+
+<br><br>
+<hr>
+
+<div class="row">
+<div class=" col-sm-4 col-sm-offset-4  col-md-4 col-md-offset-4  col-lg-4 col-lg-offset-4 ">
+<h3 id="textCenter"><i>Manage Institution Types</i></h3>
+</div>
+</div>
+
+
+
+
+<form  class="form-horizontal" role="form" th:action="@{/addInstitutionType}" 
+th:object="${manageinstitutiontype}" method="post">
+
+
+
+
+
+<div class="form-group">
+<label for="id" class="col-sm-4 col-md-4 col-lg-4 control-label"></label>
+<div class="col-sm-4 col-md-4 col-lg-4">
+<input type="hidden" class="form-control" id="id" th:field="*{id}" th:value="${manageinstitutiontype.id}">
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="createdDate" class="col-sm-4 col-md-4 col-lg-4 control-label"></label>
+<div class="col-sm-4 col-md-4 col-lg-4">
+<input type="hidden" class="form-control" id="createdDate" th:field="*{createdDate}" th:value="${manageinstitutiontype.createdDate}">
+</div>
+</div>
+
+
+
+
+<div class="form-group">
+<label for="manageinstitutiontype" class="col-sm-4 col-md-4 col-lg-4 control-label">Enter an institution type : </label>
+<div class="col-sm-4 col-md-4 col-lg-4">
+<input type="text" class="form-control" id="manageinstitutiontype"  th:field="*{institutionType}" 
+th:value="${manageinstitutiontype.institutionType}" placeholder="Enter an institution type" autocomplete="off">
+<p th:if="${#fields.hasErrors('institutionType')}" th:errors="*{institutionType}"></p>
+
+</div>
+</div>
+
+
+
+<div class="forn-group">
+<div class="col-sm-2 col-sm-offset-5  col-md-2 col-md-offset-5  col-lg-2 col-lg-offset-5">
+<button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</div>
+
+</form>
+
+<br><br>
+<hr>
+<div class="row">
+<div class=" col-sm-4 col-sm-offset-4  col-md-4 col-md-offset-4  col-lg-4 col-lg-offset-4 ">
+<h3 id="textCenter"><i>Manage Institution Names</i></h3>
+</div>
+</div>
+
+
+<form  class="form-horizontal" role="form" th:action="@{/addInstitution}" 
+th:object="${manageinstitution}" method="post">
+
+
+
+
+
+<div class="form-group">
+<label for="id" class="col-sm-4 col-md-4 col-lg-4 control-label"></label>
+<div class="col-sm-4 col-md-4 col-lg-4">
+<input type="hidden" class="form-control" id="id" th:field="*{id}" th:value="${manageinstitution.id}">
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="createdDate" class="col-sm-4 col-md-4 col-lg-4 control-label"></label>
+<div class="col-sm-4 col-md-4 col-lg-4">
+<input type="hidden" class="form-control" id="createdDate" th:field="*{createdDate}" th:value="${manageinstitution.createdDate}">
+</div>
+</div>
+
+
+
+
+
+
+<div class="form-group blu-margin">
+<label for="institutionType" class=" col-sm-4 col-md-4 col-lg-4 control-label">Choose an institution Type : </label>
+<div class="col-sm-4 col-md-4 col-lg-4 ">
+<select  class="form-control" id="institutionType" name="institutionType" th:with="institutionType=*{institutionType}" >
+
+ <option value="" disabled="disabled" selected="selected">Choose an institution type</option>
+
+<option   th:each="mit:${institutiontype}"   th:value="${mit.getInstitutionType()}" th:text="${mit.getInstitutionType()}"></option>
+
+</select>
+<p th:if="${#fields.hasErrors('institutionType')}" th:errors="*{institutionType}"></p>
+</div>
+</div>
+
+
+
+
+
+
+
+<div class="form-group">
+<label for="institutionName" class="col-sm-4 col-md-4 col-lg-4 control-label">Enter an institution Name : </label>
+<div class="col-sm-4 col-md-4 col-lg-4">
+<input type="text" class="form-control" id="institutionName"  th:field="*{institutionName}" 
+th:value="${manageinstitution.institutionName}" placeholder="Enter an institution type" autocomplete="off">
+<p th:if="${#fields.hasErrors('institutionName')}" th:errors="*{institutionName}"></p>
+
+</div>
+</div>
+
+
+
+<div class="forn-group">
+<div class="col-sm-2 col-sm-offset-5  col-md-2 col-md-offset-5  col-lg-2 col-lg-offset-5">
+<button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</div>
+
+</form>
+</fieldset>
+
+</div>
+</div>
+	
+	
+</div>
 <div th:replace="fragments/footer-js::footer-js"></div>
-
 </body>
-
+	
 </html>

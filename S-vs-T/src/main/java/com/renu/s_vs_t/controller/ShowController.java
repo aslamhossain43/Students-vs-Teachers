@@ -32,12 +32,6 @@ public String showLookteachers(Model model) {
 return "look-teachers";	
 }
 	
-@RequestMapping(value="/manage")
-public String showManage(Model model) {
-	LOGGER.info("From class ShowController,method : showManage()");
-	model.addAttribute("title", "Manage");
-return "manage";	
-}
 	
 	
 	
