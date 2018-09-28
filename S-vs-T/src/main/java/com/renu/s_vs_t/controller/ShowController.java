@@ -16,14 +16,7 @@ public String showAbout(Model model) {
 	model.addAttribute("title", "About");
 return "about";	
 }
-	
-@RequestMapping(value="/addme")
-public String showAddMe(Model model) {
-	LOGGER.info("From class ShowController,method : showAddMe()");
-	model.addAttribute("title", "Addme");
-return "addme";	
-}
-	
+		
 	
 @RequestMapping(value="/lookteachers")
 public String showLookteachers(Model model) {

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/header-css :: header-css"></head>
+
+	
+	<body>
+	
+	
+<div class="preLoader">	</div> 
+	<div th:replace="fragments/nav-bar :: nav-bar"></div>
+
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 col-sm-offset-1  col-md-10 col-md-offset-1  col-lg-10 col-lg-offset-1">
+
+<br><br><br>
+<div th:if="${message}">
+<div class="row">
+<div class=" col-sm-8 col-sm-offset-3  col-md-8 col-md-offset-3  col-lg-8 col-lg-offset-3 ">
+<div id="textCenter" class="alert alert-info fade in" th:text="${message}"></div>
+</div>
+</div>
+</div>
+<br><br><br>
+<div class="row">
+<div class=" col-sm-8 col-sm-offset-3  col-md-8 col-md-offset-3  col-lg-8 col-lg-offset-3 ">
+<h3 id="textCenter"><i>After every month your services must be truncated by admin !!!</i></h3>
+</div>
+</div>
+<hr>
+<fieldset>
+
+
+<form name="myForm" class="form-horizontal" role="form" th:action="@{/addTutor}" 
+th:object="${addtutor}" method="post" enctype="multipart/form-data">
+
+
+
+
+
+<div class="form-group">
+<label for="id" class="col-sm-3 col-md-3 col-lg-3 control-label"></label>
+<div class="col-sm-8 col-md-8 col-lg-8">
+<input type="hidden" class="form-control" id="id" th:field="*{id}" th:value="${addtutor.id}">
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="createdDate" class="col-sm-3 col-md-3 col-lg-3 control-label"></label>
+<div class="col-sm-8 col-md-8 col-lg-8">
+<input type="hidden" class="form-control" id="createdDate" th:field="*{createdDate}" th:value="${addtutor.createdDate}">
+</div>
+</div>
+
+<div class="form-group">
+<label for="image" class="col-sm-3 col-md-3 col-lg-3  control-label">Upload an image(mandatory) : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="file" class="form-control" id="image" th:field="*{iFile}" autocomplete="off">
+<p th:if="${#fields.hasErrors('iFile')}" th:errors="*{iFile}"></p>
+
+</div>
+</div>
+
+
+
+
+
+<div class="form-group">
+<label for="name" class="col-sm-3 col-md-3 col-lg-3 control-label">Your full Name : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="text" class="form-control" id="name"  th:field="*{fullName}" 
+th:value="${addtutor.fullName}" placeholder=" Enter your full name" autocomplete="off">
+<p th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></p>
+
+</div>
+</div>
+
+
+
+<div class="form-group">
+<label for="homeDistrict" class="col-sm-3 col-md-3 col-lg-3 control-label">Enter your district Name : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="text" class="form-control" id="homeDistrict"  th:field="*{homeDistrict}" 
+th:value="${addtutor.homeDistrict}" placeholder=" Enter your district name" autocomplete="off">
+<p th:if="${#fields.hasErrors('homeDistrict')}" th:errors="*{homeDistrict}"></p>
+
+</div>
+</div>
+
+
+
+
+
+<div class="form-group blu-margin">
+<label for="institutionType" class=" col-sm-3 col-md-3 col-lg-3 control-label">Choose your institution type : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<select class="form-control" id="institutionType" name="institutionType" th:with="institutionType=*{institutionType}" >
+
+ <option value="" disabled="disabled" selected="selected">Choose your institution type</option>
+
+<option th:each="inst:${allinstitutiontypes}" th:value="${inst.getInstitutionType()}" th:text="${inst.getInstitutionType()}"></option>
+
+</select>
+<p th:if="${#fields.hasErrors('institutionType')}" th:errors="*{institutionType}"></p>
+</div>
+</div>
+
+
+<div class="form-group blu-margin">
+<label for="institution" class=" col-sm-3 col-md-3 col-lg-3 control-label">Choose your institution name : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<select class="form-control" id="institution" name="institution" th:with="institution=*{institution}" >
+
+ <option value="" disabled="disabled" selected="selected">Choose your institution name</option>
+
+<option th:each="inst:${allinstitution}" th:value="${inst.getInstitutionName()}" th:text="${inst.getInstitutionName()}"></option>
+
+</select>
+<p th:if="${#fields.hasErrors('institution')}" th:errors="*{institution}"></p>
+</div>
+</div>
+
+
+
+
+
+<div class="form-group">
+<label for="department" class="col-sm-3 col-md-3 col-lg-3  control-label">Your department Name : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="text" class="form-control" id="department" th:field="*{department}" 
+th:value="${addtutor.department}" placeholder=" Enter your department Name" autocomplete="off">
+<p  th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></p>
+
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="year" class="col-sm-3 col-md-3 col-lg-3  control-label">Level,Semester/Year : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="text" class="form-control" id="year" th:field="*{year}" 
+th:value="${addtutor.year}" placeholder=" Enter Level,Semester/Year" autocomplete="off">
+<p  th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></p>
+
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="experience" class="col-sm-3 col-md-3 col-lg-3  control-label">Your experience : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="text" class="form-control" id="experience" th:field="*{experience}" 
+th:value="${addtutor.experience}" placeholder=" Enter yes or no" autocomplete="off">
+<p  th:if="${#fields.hasErrors('experience')}" th:errors="*{experience}"></p>
+
+</div>
+</div>
+
+<div class="form-group">
+<label for="courses" class="col-sm-3 col-md-3 col-lg-3  control-label">Provided courses : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="text" class="form-control" id="courses" th:field="*{courses}" 
+th:value="${addtutor.courses}" placeholder=" Enter provided courses" autocomplete="off">
+<p  th:if="${#fields.hasErrors('courses')}" th:errors="*{courses}"></p>
+
+</div>
+</div>
+
+
+
+<div class="form-group">
+<label for="contact" class="col-sm-3 col-md-3 col-lg-3  control-label">Your contact number : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="text" class="form-control" id="contact" th:field="*{contact}"
+th:value="${addtutor.contact}" placeholder=" Enter your contact number" autocomplete="off">
+<p th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}"></p>
+
+</div>
+</div>
+
+
+
+<div class="form-group">
+<label for="characters" class="col-sm-3 col-md-3 col-lg-3  control-label">Enter characters or symbol which added during registration  : </label>
+<div class="col-sm-8 col-md-8 col-lg-8">
+<input type="text" class="form-control" id="characters" th:field="*{word}" 
+th:value="${addtutor.word}" placeholder=" Enter a word which you added during registration" autocomplete="off">
+<p id="addServiceValidation" th:if="${#fields.hasErrors('word')}" th:errors="*{word}"></p>
+
+</div>
+</div>
+
+
+
+
+
+<div class="forn-group">
+<div class="col-sm-2 col-sm-offset-6  col-md-2 col-md-offset-6  col-lg-2 col-lg-offset-6">
+<button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</div>
+
+</form>
+</fieldset>
+
+</div>
+</div>
+	
+	
+</div>
+<div th:replace="fragments/footer-js::footer-js"></div>
+</body>
+	
+</html>

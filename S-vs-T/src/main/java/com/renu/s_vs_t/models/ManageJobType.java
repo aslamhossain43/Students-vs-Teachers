@@ -13,7 +13,8 @@ public class ManageJobType extends BaseManageJobType<Long> {
 	private Long id;
 	@NotBlank(message = "Enter a job type")
 	private String jobType;
-
+     @NotBlank(message="Enter a common name")
+     private String commonName;
 	public ManageJobType() {
 		// TODO Auto-generated constructor stub
 	}
@@ -35,5 +36,18 @@ public class ManageJobType extends BaseManageJobType<Long> {
 	public void setJobType(String jobType) {
 		this.jobType = jobType;
 	}
+
+	public String getCommonName() {
+		return commonName;
+	}
+
+	public void setCommonName(String commonName) {
+		this.commonName = commonName;
+	}
+	
+	
+	
+	
+	
 
 }

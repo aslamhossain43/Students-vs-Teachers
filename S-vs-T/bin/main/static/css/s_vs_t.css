@@ -45,20 +45,58 @@ select.ng-valid{
 background-color:lightgreen;
 }
 
-input[type=text]{
-background-color:pink;
-
-}
 
 #institutionType{
 background-color:pink;
 
 }
+#institution{
+background-color:pink;
 
+}
+#image{
+background-color:pink;
+}
+#name{
+background-color:pink;
+}
+#homeDistrict{
+background-color:pink;
+}
 
+#department{
+background-color:pink;
+}
+#year{
+background-color:pink;
+}
 
+#experience{
+background-color:pink;
+}
+#courses{
+background-color:pink;
+}
+#contact{
+background-color:pink;
+}
+#characters{
+background-color:pink;
+}
+#managejobtype{
+background-color:pink;
+}
+#commonName{
+background-color:pink;
+}
+#institutionName{
+background-color:pink;
+}
 
+#manageinstitutiontype{
+background-color:pink;
 
+}
 
 
 

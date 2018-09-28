@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.renu.s_vs_t.models.User;
-import com.renu.s_vs_t.repositories.User_Repository;
+import com.renu.s_vs_t.web.repositories.UserRepository;
 import com.renu.s_vs_t.web.services.SecurityService;
 import com.renu.s_vs_t.web.services.UserService;
 
@@ -29,7 +29,7 @@ import com.renu.s_vs_t.web.services.UserService;
 public class UserController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	@Autowired
-	private User_Repository user_Repository;
+	private UserRepository userRepository;
 	@Autowired
 	UserService userService;
 
@@ -92,7 +92,7 @@ public class UserController {
 		}
 
 		// can't retrieve values by digits
-		User user1 = user_Repository.getByUsername(userform.getUsername());
+		User user1 = userRepository.findByUsername(userform.getUsername());
 
 		if (user1 != null) {
 			model.addAttribute("message", "This email is already exist !!!");
@@ -134,7 +134,7 @@ public class UserController {
 			return "signup";
 		}
 		// can't retrieve values by digits
-		User user1 = user_Repository.getByUsername(userform.getUsername());
+		User user1 = userRepository.findByUsername(userform.getUsername());
 
 		if (user1 != null) {
 			model.addAttribute("message", "This email is already exist !!!");
@@ -174,7 +174,7 @@ public class UserController {
 		Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
 		String email=authentication.getName();
 		LOGGER.info(" From class UserController ,method : getEmail()");
-		User user=user_Repository.getByUsername(email);
+		User user=userRepository.findByUsername(email);
 		
 		return user;
 		
