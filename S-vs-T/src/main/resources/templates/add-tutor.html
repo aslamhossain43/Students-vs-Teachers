@@ -14,7 +14,7 @@
 <div class="row">
 <div class="col-sm-10 col-sm-offset-1  col-md-10 col-md-offset-1  col-lg-10 col-lg-offset-1">
 
-<br><br><br>
+<br><br><br><br>
 <div th:if="${message}">
 <div class="row">
 <div class=" col-sm-8 col-sm-offset-3  col-md-8 col-md-offset-3  col-lg-8 col-lg-offset-3 ">
@@ -22,13 +22,13 @@
 </div>
 </div>
 </div>
-<br><br><br>
+<br>
 <div class="row">
 <div class=" col-sm-8 col-sm-offset-3  col-md-8 col-md-offset-3  col-lg-8 col-lg-offset-3 ">
 <h3 id="textCenter"><i>After every month your services must be truncated by admin !!!</i></h3>
 </div>
 </div>
-<hr>
+
 <fieldset>
 
 
@@ -53,6 +53,14 @@ th:object="${addtutor}" method="post" enctype="multipart/form-data">
 <input type="hidden" class="form-control" id="createdDate" th:field="*{createdDate}" th:value="${addtutor.createdDate}">
 </div>
 </div>
+
+<div class="form-group">
+<label for="iCode" class="col-sm-3 col-md-3 col-lg-3 control-label"></label>
+<div class="col-sm-8 col-md-8 col-lg-8">
+<input type="hidden" class="form-control" id="iCode" th:field="*{iCode}" th:value="${addtutor.iCode}">
+</div>
+</div>
+
 
 <div class="form-group">
 <label for="image" class="col-sm-3 col-md-3 col-lg-3  control-label">Upload an image(mandatory) : </label>

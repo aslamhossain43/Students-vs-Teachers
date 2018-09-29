@@ -89,7 +89,7 @@
 <input type="text" class="form-control" id="word" th:field="*{word}" data-ng-model="word" required 
 placeholder=" Enter some characters(10-50) and mind it  for security " autocomplete="off">
 <p data-ng-show="userForm.word.$touched&&userForm.word.$invalid"><i>some characters(10-50) is required</i></p>
-<p id="addServiceValidation" th:if="${#fields.hasErrors('word')}" th:errors="*{word}"></p>
+<p th:if="${#fields.hasErrors('word')}" th:errors="*{word}"></p>
 
 </div>
 </div>
@@ -121,9 +121,6 @@ placeholder=" Enter some characters(10-50) and mind it  for security " autocompl
 	<div class="form-group">
 		<label class="control-label col-sm-3 col-md-3 col-lg-3">Select Role :</label>
 		<div class="col-sm-7 col-md-7 col-lg-7">
-			<label sec:authorize="hasAuthority('ADMIN')" class="checkbox-inline">
-			<input type="checkbox" th:field="*{roles}"  value="ADMIN"/>Admin 				
-			</label>
 			<label class="checkbox-inline">
 				 <input type="checkbox" th:field="*{roles}" data-ng-model="roles" required value="USER" />User
 			</label>

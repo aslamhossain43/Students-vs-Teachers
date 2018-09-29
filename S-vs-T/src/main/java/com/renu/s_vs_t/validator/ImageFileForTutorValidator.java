@@ -5,11 +5,12 @@ import org.springframework.validation.Validator;
 
 import com.renu.s_vs_t.models.ManageTutor;
 
-public class ImageFileValidator implements Validator {
+public class ImageFileForTutorValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return ManageTutor.class.equals(clazz);
+		
 	}
 
 	@Override

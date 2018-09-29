@@ -122,8 +122,9 @@ placeholder=" Enter some characters(10-50) and mind it  for security " autocompl
 		<label class="control-label col-sm-3 col-md-3 col-lg-3">Select Role :</label>
 		<div class="col-sm-7 col-md-7 col-lg-7">
 			<label class="checkbox-inline">
-				 <input type="checkbox" th:field="*{roles}" data-ng-model="roles" required value="USER" />User
+			<input type="checkbox" th:field="*{roles}"  value="ADMIN"/>Admin 				
 			</label>
+			
 <p data-ng-show="userForm.roles.$touched&&userForm.roles.$invalid"><i>Role is required</i></p>
 		</div>
 		

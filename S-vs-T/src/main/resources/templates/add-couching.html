@@ -1,1 +1,200 @@
-couching
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/header-css :: header-css"></head>
+
+	
+	<body>
+	
+	
+<div class="preLoader">	</div> 
+	<div th:replace="fragments/nav-bar :: nav-bar"></div>
+
+
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm-10 col-sm-offset-1  col-md-10 col-md-offset-1  col-lg-10 col-lg-offset-1">
+
+<br><br><br><br>
+<div th:if="${message}">
+<div class="row">
+<div class=" col-sm-8 col-sm-offset-3  col-md-8 col-md-offset-3  col-lg-8 col-lg-offset-3 ">
+<div id="textCenter" class="alert alert-info fade in" th:text="${message}"></div>
+</div>
+</div>
+</div>
+<br>
+<div class="row">
+<div class=" col-sm-8 col-sm-offset-3  col-md-8 col-md-offset-3  col-lg-8 col-lg-offset-3 ">
+<h3 id="textCenter"><i>After every month your services must be truncated by admin !!!</i></h3>
+</div>
+</div>
+
+<fieldset>
+
+
+<form name="myForm" class="form-horizontal" role="form" th:action="@{/addCouching}" 
+th:object="${addcouching}" method="post" enctype="multipart/form-data">
+
+
+
+
+
+<div class="form-group">
+<label for="id" class="col-sm-3 col-md-3 col-lg-3 control-label"></label>
+<div class="col-sm-8 col-md-8 col-lg-8">
+<input type="hidden" class="form-control" id="id" th:field="*{id}" th:value="${addcouching.id}">
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="createdDate" class="col-sm-3 col-md-3 col-lg-3 control-label"></label>
+<div class="col-sm-8 col-md-8 col-lg-8">
+<input type="hidden" class="form-control" id="createdDate" th:field="*{createdDate}" th:value="${addcouching.createdDate}">
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="iCode" class="col-sm-3 col-md-3 col-lg-3 control-label"></label>
+<div class="col-sm-8 col-md-8 col-lg-8">
+<input type="hidden" class="form-control" id="iCode" th:field="*{iCode}" th:value="${addcouching.iCode}">
+</div>
+</div>
+
+
+
+
+<div class="form-group">
+<label for="image" class="col-sm-3 col-md-3 col-lg-3  control-label">Upload an image(mandatory) : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="file" class="form-control" id="image" th:field="*{iFile}" autocomplete="off">
+<p th:if="${#fields.hasErrors('iFile')}" th:errors="*{iFile}"></p>
+
+</div>
+</div>
+
+
+
+
+
+<div class="form-group">
+<label for="name" class="col-sm-3 col-md-3 col-lg-3 control-label">Couching's Name : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="text" class="form-control" id="name"  th:field="*{couchingName}" 
+th:value="${addcouching.couchingName}" placeholder=" Enter couching's full name" autocomplete="off">
+<p th:if="${#fields.hasErrors('couchingName')}" th:errors="*{couchingName}"></p>
+
+</div>
+</div>
+
+
+
+<div class="form-group">
+<label for="districtName" class="col-sm-3 col-md-3 col-lg-3 control-label">Enter district Name : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="text" class="form-control" id="districtName"  th:field="*{districtName}" 
+th:value="${addcouching.districtName}" placeholder=" Enter district name" autocomplete="off">
+<p th:if="${#fields.hasErrors('districtName')}" th:errors="*{districtName}"></p>
+
+</div>
+</div>
+
+
+
+
+
+<div class="form-group blu-margin">
+<label for="institutionType" class=" col-sm-3 col-md-3 col-lg-3 control-label">Choose couching type : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<select class="form-control" id="institutionType" name="jobType" th:with="jobType=*{jobType}" >
+
+ <option value="" disabled="disabled" selected="selected">Choose couching type</option>
+
+<option th:each="inst:${jobtypes}" th:value="${inst.getJobType()}" th:text="${inst.getJobType()}"></option>
+
+</select>
+<p th:if="${#fields.hasErrors('jobType')}" th:errors="*{jobType}"></p>
+</div>
+</div>
+
+
+
+
+<div class="form-group">
+<label for="qualification" class="col-sm-3 col-md-3 col-lg-3  control-label">Teacher's name,institution,department : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="text" class="form-control" id="qualification" th:field="*{institutionDepartment}" 
+th:value="${addcouching.institutionDepartment}" placeholder=" Enter teacher's name,institution,department" autocomplete="off">
+<p  th:if="${#fields.hasErrors('institutionDepartment')}" th:errors="*{institutionDepartment}"></p>
+
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="classes" class="col-sm-3 col-md-3 col-lg-3  control-label">Teaching classe : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="text" class="form-control" id="classes" th:field="*{classes}" 
+th:value="${addcouching.classes}" placeholder=" Enter teaching classes" autocomplete="off">
+<p  th:if="${#fields.hasErrors('classes')}" th:errors="*{classes}"></p>
+
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="address" class="col-sm-3 col-md-3 col-lg-3  control-label">Couching's details address : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="text" class="form-control" id="address" th:field="*{address}" 
+th:value="${addcouching.address}" placeholder=" Enter couching's address" autocomplete="off">
+<p  th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></p>
+
+</div>
+</div>
+
+
+<div class="form-group">
+<label for="contact" class="col-sm-3 col-md-3 col-lg-3  control-label">Contact number : </label>
+<div class="col-sm-8 col-md-8 col-lg-8 ">
+<input type="text" class="form-control" id="contact" th:field="*{contact}"
+th:value="${addcouching.contact}" placeholder=" Enter contact number" autocomplete="off">
+<p th:if="${#fields.hasErrors('contact')}" th:errors="*{contact}"></p>
+
+</div>
+</div>
+
+
+
+<div class="form-group">
+<label for="characters" class="col-sm-3 col-md-3 col-lg-3  control-label">Enter characters or symbol which added during registration  : </label>
+<div class="col-sm-8 col-md-8 col-lg-8">
+<input type="text" class="form-control" id="characters" th:field="*{word}" 
+th:value="${addcouching.word}" placeholder=" Enter a word which you added during registration" autocomplete="off">
+<p th:if="${#fields.hasErrors('word')}" th:errors="*{word}"></p>
+
+</div>
+</div>
+
+
+
+
+
+<div class="forn-group">
+<div class="col-sm-2 col-sm-offset-6  col-md-2 col-md-offset-6  col-lg-2 col-lg-offset-6">
+<button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</div>
+
+</form>
+</fieldset>
+
+</div>
+</div>
+	
+	
+</div>
+<div th:replace="fragments/footer-js::footer-js"></div>
+</body>
+	
+</html>
