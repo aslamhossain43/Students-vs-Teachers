@@ -10,21 +10,35 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.renu.s_vs_t.models.ManageCouchingCenter;
+import com.renu.s_vs_t.models.ManageTutor;
 import com.renu.s_vs_t.repositories.ManageCouchingCenterRepository;
+import com.renu.s_vs_t.repositories.ManageTutorRepository;
 
 @Controller
 public class JsonController {
-private static final Logger LOGGER=LoggerFactory.getLogger(JsonController.class);
-@Autowired
-ManageCouchingCenterRepository manageCouchingCenterRepository;
-@RequestMapping(value="/viewallcouching")
-@ResponseBody
-public List<ManageCouchingCenter>getAllCouchingCenter(){
-	LOGGER.info("From class JsonController,method : getAllCouchingCenter()");
-	List<ManageCouchingCenter>manageCouchingCenters=manageCouchingCenterRepository.findByJobType(AddmeController.jobTypes);
-	return manageCouchingCenters;
-}
+	private static final Logger LOGGER = LoggerFactory.getLogger(JsonController.class);
+	@Autowired
+	ManageCouchingCenterRepository manageCouchingCenterRepository;
+	@Autowired
+	ManageTutorRepository manageTutorRepository;
 
+	@RequestMapping(value = "/viewalltutorByInstitutionName")
+	@ResponseBody
+	public List<ManageTutor> getAllTutor() {
+		LOGGER.info("From class JsonController,method : getAllTutor()");
+		return manageTutorRepository.findByInstitutionName(AddmeController.institutionName);
 
+	}
+
+	@RequestMapping(value = "/viewallcouching")
+	@ResponseBody
+	public List<ManageCouchingCenter> getAllCouching() {
+		LOGGER.info("From class JsonController,method : getAllCouching()");
+		List<ManageCouchingCenter> manageCouchingCenters = manageCouchingCenterRepository
+				.findByJobType(AddmeController.jobTypes);
+
+		return manageCouchingCenters;
+
+	}
 
 }

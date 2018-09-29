@@ -55,6 +55,10 @@ public class ManageTutor extends BaseManageTutor<Long> {
 	}
 
 
+	public void setiCode(String iCode) {
+		this.iCode = iCode;
+	}
+
 	public MultipartFile getiFile() {
 		return iFile;
 	}

@@ -1,5 +1,6 @@
 package com.renu.s_vs_t.controller;
 
+import java.io.File;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -14,13 +15,19 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.renu.s_vs_t.models.ManageCouchingCenter;
 import com.renu.s_vs_t.models.ManageInstitution;
 import com.renu.s_vs_t.models.ManageInstitutionType;
 import com.renu.s_vs_t.models.ManageJobType;
+import com.renu.s_vs_t.models.ManageTutor;
+import com.renu.s_vs_t.repositories.ManageCouchingCenterRepository;
 import com.renu.s_vs_t.repositories.ManageInstitutionRepository;
 import com.renu.s_vs_t.repositories.ManageInstitutionTypeRepository;
 import com.renu.s_vs_t.repositories.ManageJobTypeRepository;
+import com.renu.s_vs_t.repositories.ManageTutorRepository;
+import com.renu.s_vs_t.utility.FileUploadUtility;
 
 @Controller
 @ControllerAdvice
@@ -32,7 +39,10 @@ public class AdminController {
 	ManageInstitutionRepository manageInstitutionRepository;
 	@Autowired
 	ManageJobTypeRepository manageJobTypeRepository;
-
+    @Autowired
+    ManageCouchingCenterRepository manageCouchingCenterRepository;
+    @Autowired
+    ManageTutorRepository manageTutorRepository;
 	@RequestMapping(value = "/showManageInstitutionType")
 	public String showManageInstitutionType(Model model) {
 		LOGGER.info("From class AdminController,method :  showManageInstitutionType() ");
@@ -124,5 +134,64 @@ public class AdminController {
 		List<ManageInstitutionType> institutionType = manageInstitutionTypeRepository.findAll();
 		return institutionType;
 	}
+	
+	
+	
+	
+	
+	@RequestMapping(value = "/delete")
+	public String deleteById(@RequestParam("id") long id, Model model) {
+		ManageTutor manageTutor=manageTutorRepository.getOne(id);
+		ManageCouchingCenter manageCouchingCenter=manageCouchingCenterRepository.getOne(id);
+		
+		String iCodeT=manageTutor.getiCode();
+		String iCodeC=manageCouchingCenter.getiCode();
+	
+		if (manageCouchingCenter.getJobType()!=null) {
+			
+			File iFile=new File(FileUploadUtility.IABS_PATH+iCodeC+".jpg");
+		
+			if (iFile.exists()) {
+				iFile.delete();
+			}
+			manageCouchingCenterRepository.deleteById(id);
+			
+			
+
+			model.addAttribute("message", id + "  Number id has been deleted successfully !!!");
+			model.addAttribute("heading", "Available "+manageCouchingCenter.getJobType());
+			return "view-allcouching";
+			
+			
+			
+			
+		}
+		else {
+			File iFile=new File(FileUploadUtility.IABS_PATH+iCodeT+".jpg");
+			
+			if (iFile.exists()) {
+				iFile.delete();
+			}
+			manageTutorRepository.deleteById(id);
+
+
+			model.addAttribute("message", id + "  Number id has been deleted successfully !!!");
+			model.addAttribute("heading", "Available Tutor");
+			
+			return "view-alltutor";
+			
+			
+			
+		}
+		
+	
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

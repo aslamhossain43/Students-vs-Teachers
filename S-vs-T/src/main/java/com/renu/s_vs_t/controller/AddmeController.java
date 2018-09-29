@@ -54,6 +54,11 @@ public class AddmeController {
 	@Autowired
 	ManageCouchingCenterRepository manageCouchingCenterRepository;
     public static String jobTypes="";
+    public static String institutionType="";
+    public static String institutionName="";
+    
+    
+    
 	@RequestMapping(value = "/showAddme")
 	public String showJobType(Model model) {
 		LOGGER.info("From class AddmeController,method : showJobType()");
@@ -121,7 +126,7 @@ public class AddmeController {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String email = authentication.getName();
-		User user = userRepository.findByUsername(email);
+	     User user = userRepository.findByUsername(email);
 		LOGGER.info("Getting email : " + email);
 		if (!manageTutor.getWord().equals(user.getWord())) {
 			model.addAttribute("message",
@@ -133,16 +138,25 @@ public class AddmeController {
 			FileUploadUtility.imageUploadFile(iRequest, manageTutor.getiFile(), manageTutor.getiCode());
 		}
 		if (manageTutor.getId() == null) {
-
+            
 			manageTutorRepository.save(manageTutor);
 			manageTutor.setId(null);
 		} else {
+			ManageTutor manageTutorInstitutionType=manageTutorRepository.getByInstitutionType(manageTutor.getInstitutionType());
+			ManageTutor manageTutorInstitution=manageTutorRepository.getByInstitution(manageTutor.getInstitution());
+			
+			if (manageTutorInstitutionType!=null && manageTutorInstitution!=null) {
+				
 			manageTutorRepository.save(manageTutor);
+			}else {
+				model.addAttribute("message","Not matching institution type or institution name");
+				manageTutor.setId(manageTutor.getId());
+				return "add-tutor";
+			}
 
 		}
 
 		model.addAttribute("message", "Your operation has been completed successfully !!!");
-
 		return "add-tutor";
 	}
 
@@ -197,13 +211,63 @@ public class AddmeController {
 		model.addAttribute("jsonurl", "/viewallcouching");
 		model.addAttribute("heading","Available "+jobtype);
 		jobTypes=jobtype;
+		List<ManageCouchingCenter>manageCouchingCenter=manageCouchingCenterRepository.findByJobType(jobtype);
+
 		 Collection<SimpleGrantedAuthority>authorities=(Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
 			
 			String role=authorities.toString().replace("[","").replace("]","") ;
 			LOGGER.info("From class: AddmeController,method : viewByJobType(), authority : "+role);
 			model.addAttribute("role",role );
-		return "view-allcouching";
+		
+		
+		if (manageCouchingCenter.size()!=0) {
+			model.addAttribute("jsonurl","/viewallcouching");
+			model.addAttribute("heading ", "Available "+jobtype);
+			
+			return "view-allcouching";
+			
+		}
+		else {
+			return "view-allinstitutiontype";
+		}
+		
+		
+	
+		
+		
 	}
+	
+
+	@RequestMapping(value="/view-by-institution-type",method=RequestMethod.GET)
+	public String viewByInstitution(@RequestParam("institutiontype")String institutiontype, Model model) {
+		LOGGER.info("From class AddmeController,method method : viewByInstitution() ");
+		model.addAttribute("institutionName",manageInstitutionRepository.findByJobType(institutiontype));
+		return "view_all_institution_name";
+	}
+	
+	
+	@RequestMapping(value="/view-by-instName")
+	public String viewTutorByInstitutionName(@RequestParam("institutionName")String institutionName,Model model) {
+		LOGGER.info("From class AddmeController,method method : viewTutorByInstitutionName() ");
+		model.addAttribute("jsonurl", "/viewalltutorByInstitutionName");
+		model.addAttribute("heading","Available teachers");
+	    AddmeController.institutionName=institutionName;
+
+		 Collection<SimpleGrantedAuthority>authorities=(Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+			
+			String role=authorities.toString().replace("[","").replace("]","") ;
+			LOGGER.info("From class: AddmeController,method : viewByJobType(), authority : "+role);
+			model.addAttribute("role",role );
+		
+		
+		
+		return "view-alltutor";
+	}
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping(value="/showUpdateWordByUser",method=RequestMethod.GET)
@@ -223,9 +287,11 @@ public class AddmeController {
 		LOGGER.info("Getting word : "+word);
 		
 		
-		ManageTutor manageTutor=manageTutorRepository.getOne(id);
-		ManageCouchingCenter manageCouchingCenter=manageCouchingCenterRepository.getOne(id);
-		if (manageCouchingCenter.getJobType()!=null) {
+		
+		ManageCouchingCenter manageCouchingCenter=manageCouchingCenterRepository.getById(id);
+		ManageTutor manageTutor=manageTutorRepository.getById(id);
+		if (manageCouchingCenter!=null) {
+		
 			if (word.equals(manageCouchingCenter.getWord())) {
 				model.addAttribute("addcouching", manageCouchingCenter);
 				return "add-couching";
@@ -237,6 +303,7 @@ public class AddmeController {
 			}
 		}
 		else {
+			
 			if (word.equals(manageTutor.getWord())) {
 				model.addAttribute("addtutor", manageTutor);
 				return "add-tutor";
