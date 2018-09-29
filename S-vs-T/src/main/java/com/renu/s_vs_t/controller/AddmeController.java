@@ -58,6 +58,15 @@ public class AddmeController {
     public static String institutionName="";
     
     
+   
+   
+    public User getUser() {
+    	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    	String email = authentication.getName();
+    	 User user = userRepository.findByUsername(email);
+		return user;
+    	
+    }
     
 	@RequestMapping(value = "/showAddme")
 	public String showJobType(Model model) {
@@ -114,42 +123,42 @@ public class AddmeController {
 			Model model, HttpServletRequest vRequest, HttpServletRequest iRequest) {
 		LOGGER.info("From Class : AddmeController,method : addTutor()");
 		LOGGER.info("From Class : AddmeController,method : addTutor(),,Getting id : " + manageTutor.getId());
-		if (manageTutor.getId() == null) {
-
-			new ImageFileForTutorValidator().validate(manageTutor, bindingResult);
-		}
+		
 
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("message", "Your operation has not been completed successfully !!!");
 			return "add-tutor";
 		}
 
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String email = authentication.getName();
-	     User user = userRepository.findByUsername(email);
-		LOGGER.info("Getting email : " + email);
-		if (!manageTutor.getWord().equals(user.getWord())) {
+		if (!manageTutor.getWord().equals(getUser().getWord())) {
 			model.addAttribute("message",
 					"Your characters or symbol not matching which you added during registration !");
 			return "add-tutor";
 		}
 
-		if (!manageTutor.getiFile().getOriginalFilename().equals("")) {
-			FileUploadUtility.imageUploadFile(iRequest, manageTutor.getiFile(), manageTutor.getiCode());
-		}
+		
 		if (manageTutor.getId() == null) {
-            
+            ManageInstitution manageInstitution=manageInstitutionRepository.getByInstitutionName(manageTutor.getInstitution());
+            if (manageInstitution.getInstitutionName().equals(manageTutor.getInstitution())&&manageInstitution.getInstitutionType().equals(manageTutor.getInstitutionType())) {
+            	new ImageFileForTutorValidator().validate(manageTutor, bindingResult);
+            	if (!manageTutor.getiFile().getOriginalFilename().equals("")) {
+        			FileUploadUtility.imageUploadFile(iRequest, manageTutor.getiFile(), manageTutor.getiCode());
+        		}
 			manageTutorRepository.save(manageTutor);
 			manageTutor.setId(null);
+            }
+            else {
+            	model.addAttribute("message","Institution name not match with institution name");
+				return "add-tutor";
+			}
 		} else {
-			ManageTutor manageTutorInstitutionType=manageTutorRepository.getByInstitutionType(manageTutor.getInstitutionType());
-			ManageTutor manageTutorInstitution=manageTutorRepository.getByInstitution(manageTutor.getInstitution());
-			
-			if (manageTutorInstitutionType!=null && manageTutorInstitution!=null) {
+			  ManageInstitution manageInstitution=manageInstitutionRepository.getByInstitutionName(manageTutor.getInstitution());
+	          
+			if (manageInstitution.getInstitutionName().equals(manageTutor.getInstitution())&&manageInstitution.getInstitutionType().equals(manageTutor.getInstitutionType())) {
 				
 			manageTutorRepository.save(manageTutor);
 			}else {
-				model.addAttribute("message","Not matching institution type or institution name");
+				model.addAttribute("message","Institution name not match with institution name");
 				manageTutor.setId(manageTutor.getId());
 				return "add-tutor";
 			}
@@ -176,11 +185,8 @@ public class AddmeController {
 			return "add-couching";
 		}
 
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String email = authentication.getName();
-		User user = userRepository.findByUsername(email);
-		LOGGER.info("Getting email : " + email);
-		if (!manageCouchingCenter.getWord().equals(user.getWord())) {
+
+		if (!manageCouchingCenter.getWord().equals(getUser().getWord())) {
 			model.addAttribute("message",
 					"Your characters or symbol not matching which you added during registration !");
 			return "add-couching";
@@ -327,14 +333,14 @@ public class AddmeController {
 	@RequestMapping(value="/updateJobType",method=RequestMethod.GET)
 	public String showupdateJobType(@RequestParam("id") long id, Model model) {
 		LOGGER.info("From class AddmeController,method method : showupdateJobType() ");
-		ManageTutor manageTutor=manageTutorRepository.getOne(id);
-		ManageCouchingCenter manageCouchingCenter=manageCouchingCenterRepository.getOne(id);
-		if (manageCouchingCenter.getJobType()!=null) {
+		ManageCouchingCenter manageCouchingCenter=manageCouchingCenterRepository.getById(id);
+		if (manageCouchingCenter!=null) {
 			model.addAttribute("addcouching",manageCouchingCenter);
 			return "add-couching";
 			
 		}
 		else {
+			ManageTutor manageTutor=manageTutorRepository.getById(id);
 			model.addAttribute("addtutor",manageTutor);
 			return "add-tutor";
 		}

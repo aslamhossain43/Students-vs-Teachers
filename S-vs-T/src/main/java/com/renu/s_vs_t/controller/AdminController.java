@@ -141,13 +141,12 @@ public class AdminController {
 	
 	@RequestMapping(value = "/delete")
 	public String deleteById(@RequestParam("id") long id, Model model) {
-		ManageTutor manageTutor=manageTutorRepository.getOne(id);
-		ManageCouchingCenter manageCouchingCenter=manageCouchingCenterRepository.getOne(id);
+		ManageTutor manageTutor=manageTutorRepository.getById(id);
+		ManageCouchingCenter manageCouchingCenter=manageCouchingCenterRepository.getById(id);
 		
-		String iCodeT=manageTutor.getiCode();
-		String iCodeC=manageCouchingCenter.getiCode();
 	
-		if (manageCouchingCenter.getJobType()!=null) {
+		if (manageCouchingCenter!=null) {
+			String iCodeC=manageCouchingCenter.getiCode();
 			
 			File iFile=new File(FileUploadUtility.IABS_PATH+iCodeC+".jpg");
 		
@@ -167,6 +166,7 @@ public class AdminController {
 			
 		}
 		else {
+			String iCodeT=manageTutor.getiCode();
 			File iFile=new File(FileUploadUtility.IABS_PATH+iCodeT+".jpg");
 			
 			if (iFile.exists()) {

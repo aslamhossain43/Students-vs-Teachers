@@ -10,6 +10,9 @@ import org.springframework.data.repository.query.Param;
 import com.renu.s_vs_t.models.ManageInstitution;
 
 public interface ManageInstitutionRepository extends JpaRepository<ManageInstitution, Long>,JpaSpecificationExecutor<ManageInstitution>{
+	  //get by institution name
+	public ManageInstitution getByInstitutionName(String institutionName);
+	
 	//find by category
 			public static final String institutionType="FROM ManageInstitution where institutionType=:institutionType";
 		        	@Query(institutionType)

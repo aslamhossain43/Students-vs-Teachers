@@ -16,15 +16,7 @@ public interface ManageTutorRepository extends JpaRepository<ManageTutor, Long>,
 	public ManageTutor getByInstitutionType(String institutionType);
 	//find by getByInstitution
 		public ManageTutor getByInstitution(String institution);
-		
-	//find by category
-			public static final String jobType="FROM ManageTutor where jobType=:jobType";
-		        	@Query(jobType)
-		        List<ManageTutor> findByJobType(@Param("jobType")String jobType);
-		        	
-		        	
-		        	
-
+	
 		        	//find by category
 					public static final String institutionName="FROM ManageTutor where institution=:institutionName";
 				        	@Query(institutionName)
