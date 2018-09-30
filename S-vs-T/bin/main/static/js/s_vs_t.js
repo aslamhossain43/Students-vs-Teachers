@@ -174,6 +174,21 @@ if(table.length){
 		
 		
 	  },
+{
+		  
+		  data:'id',
+		  mRender:function(data){
+			  				
+			  var str='';
+			
+						
+			  str+='<a href="/singleViewForTutor?id='+data+'" id="gmapjs" class="btn btn-primary">View Single</a>';
+                	return str;
+					
+		  }
+		  
+	  }
+	  ,
 	  {
 		  
 		  data:'fullName',

@@ -11,6 +11,18 @@ background:url(../images/loader.gif)50% no-repeat #fff
 
 }
 
+
+
+#homeTitle{
+color:blue;
+font-style: italic;
+}
+#homeDescription{
+color:bule;
+font-style: italic;
+}
+
+
 #textCenter{
 
 text-align:center;
@@ -35,8 +47,8 @@ background-color:lightgreen;
 }
 
 p{
-
-color:red;
+color:bule;
+font-style: italic;
 }
 select.ng-invalid{
 background-color:pink;

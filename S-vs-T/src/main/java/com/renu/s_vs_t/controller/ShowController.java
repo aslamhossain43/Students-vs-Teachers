@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.renu.s_vs_t.models.ManageCouchingCenter;
+import com.renu.s_vs_t.models.ManageTutor;
 import com.renu.s_vs_t.repositories.ManageCouchingCenterRepository;
 import com.renu.s_vs_t.repositories.ManageTutorRepository;
 
@@ -47,6 +48,15 @@ public String singleViewForCouching(@RequestParam("id")Long id,Model model) {
 	return "single_for_couching";
 }
 
+
+@RequestMapping(value="/singleViewForTutor")
+public String singleViewForTutor(@RequestParam("id")Long id,Model model) {
+	LOGGER.info("From class ShowController ,method : singleViewForTutor()");
+	ManageTutor manageTutor=manageTutorRepository.getById(id);
+	model.addAttribute("st", manageTutor);
+	
+	return "single_for_tutor";
+}
 
 	
 	
