@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.renu.s_vs_t.models.ManageCouchingCenter;
+import com.renu.s_vs_t.models.ManageInstitution;
+import com.renu.s_vs_t.models.ManageJobType;
 import com.renu.s_vs_t.models.ManageTutor;
 import com.renu.s_vs_t.repositories.ManageCouchingCenterRepository;
+import com.renu.s_vs_t.repositories.ManageInstitutionRepository;
+import com.renu.s_vs_t.repositories.ManageJobTypeRepository;
 import com.renu.s_vs_t.repositories.ManageTutorRepository;
 
 @Controller
@@ -21,7 +25,10 @@ public class JsonController {
 	ManageCouchingCenterRepository manageCouchingCenterRepository;
 	@Autowired
 	ManageTutorRepository manageTutorRepository;
-
+    @Autowired
+    ManageInstitutionRepository manageInstitutionRepository;
+    @Autowired
+    ManageJobTypeRepository manageJobTypeRepository;
 	@RequestMapping(value = "/viewalltutorByInstitutionName")
 	@ResponseBody
 	public List<ManageTutor> getAllTutor() {
@@ -40,5 +47,37 @@ public class JsonController {
 		return manageCouchingCenters;
 
 	}
+	
+	
+	@RequestMapping(value = "/viewalljobtypes")
+	@ResponseBody
+	public List<ManageJobType> getAllJobTypes() {
+		LOGGER.info("From class JsonController,method : getAllJobTypes()");
+		List<ManageJobType> manageJobTypes =manageJobTypeRepository.findAll();
+
+		return manageJobTypes;
+
+	}
+	
+	@RequestMapping(value = "/viewallinstitution")
+	@ResponseBody
+	public List<ManageInstitution> getAllInstitutions() {
+		LOGGER.info("From class JsonController,method : getAllInstitutions()");
+		List<ManageInstitution> manageInstitutions =manageInstitutionRepository.findAll();
+
+		return manageInstitutions;
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

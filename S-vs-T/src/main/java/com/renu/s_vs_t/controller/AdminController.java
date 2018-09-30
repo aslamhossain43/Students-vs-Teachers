@@ -50,6 +50,9 @@ public class AdminController {
 		model.addAttribute("manageinstitutiontype", new ManageInstitutionType());
 		model.addAttribute("manageinstitution", new ManageInstitution());
 		model.addAttribute("managejobtype", new ManageJobType());
+		model.addAttribute("jsonurladmin1", "/viewalljobtypes");
+		model.addAttribute("jsonurladmin2", "/viewallinstitution");
+		
 		return "manage";
 	}
 
@@ -139,13 +142,13 @@ public class AdminController {
 	
 	
 	
-	@RequestMapping(value = "/delete")
+	@RequestMapping(value = "/deleteCouchingByAdmin")
 	public String deleteById(@RequestParam("id") long id, Model model) {
-		ManageTutor manageTutor=manageTutorRepository.getById(id);
+		
 		ManageCouchingCenter manageCouchingCenter=manageCouchingCenterRepository.getById(id);
 		
 	
-		if (manageCouchingCenter!=null) {
+	
 			String iCodeC=manageCouchingCenter.getiCode();
 			
 			File iFile=new File(FileUploadUtility.IABS_PATH+iCodeC+".jpg");
@@ -157,15 +160,24 @@ public class AdminController {
 			
 			
 
-			model.addAttribute("message", id + "  Number id has been deleted successfully !!!");
+			model.addAttribute("message", id + "  Number id from couching center has been deleted successfully !!!");
 			model.addAttribute("heading", "Available "+manageCouchingCenter.getJobType());
 			return "view-allcouching";
 			
 			
 			
 			
-		}
-		else {
+		
+		
+	
+	}
+	
+	@RequestMapping(value = "/deleteTutorByAdmin")
+	public String deleteByAdmin(@RequestParam("id") long id, Model model) {
+		ManageTutor manageTutor=manageTutorRepository.getById(id);
+		LOGGER.info("From class AdminController,method : deleteByAdmin() ");
+	
+		
 			String iCodeT=manageTutor.getiCode();
 			File iFile=new File(FileUploadUtility.IABS_PATH+iCodeT+".jpg");
 			
@@ -175,17 +187,87 @@ public class AdminController {
 			manageTutorRepository.deleteById(id);
 
 
-			model.addAttribute("message", id + "  Number id has been deleted successfully !!!");
+			model.addAttribute("message", id + "  Number id from tutor has been deleted successfully !!!");
 			model.addAttribute("heading", "Available Tutor");
 			
 			return "view-alltutor";
 			
 			
 			
-		}
+		
 		
 	
 	}
+	
+	
+	
+
+	@RequestMapping(value="/editJobTypeByAdmin",method=RequestMethod.GET)
+	public String showEditJobType(@RequestParam("id") long id, Model model) {
+		LOGGER.info("From class AdminController,method : showEditJobType() ");
+		
+		ManageJobType manageJobType=manageJobTypeRepository.getById(id);
+           model.addAttribute("managejobtype", manageJobType);
+       	model.addAttribute("manageinstitution",new ManageInstitution());
+       	model.addAttribute("manageinstitutiontype", new ManageInstitutionType());
+           return "manage";
+		
+	}
+	
+	@RequestMapping(value="/editInstitutionByAdmin",method=RequestMethod.GET)
+	public String showEditInstitution(@RequestParam("id") long id, Model model) {
+		LOGGER.info("From class AdminController,method : showEditInstitution() ");
+		ManageInstitution manageInstitution=manageInstitutionRepository.getById(id);
+	
+			model.addAttribute("manageinstitution",manageInstitution);
+			model.addAttribute("managejobtype",new ManageJobType());
+			model.addAttribute("manageinstitutiontype", new ManageInstitutionType());
+			return "manage";
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+
+	@RequestMapping(value = "/deleteJobTypeByAdmin")
+	public String deleteJobTypeAndInstitutionByAdmin(@RequestParam("id") long id, Model model) {
+		manageJobTypeRepository.deleteById(id);
+		model.addAttribute("title", "Manage");
+		model.addAttribute("message",id+" number id from jobType has been deleted successfully !!!");
+		model.addAttribute("manageinstitutiontype", new ManageInstitutionType());
+		model.addAttribute("manageinstitution", new ManageInstitution());
+		model.addAttribute("managejobtype", new ManageJobType());
+		
+			return "manage";
+		}
+	
+	
+	
+	
+	
+@RequestMapping(value = "/deleteInstitutionByAdmin")
+public String deleteAndInstitutionByAdmin(@RequestParam("id") long id, Model model) {
+	manageInstitutionRepository.deleteById(id);
+	model.addAttribute("title", "Manage");
+	model.addAttribute("message",id+" number id from institution has been deleted successfully !!!");
+	model.addAttribute("manageinstitutiontype", new ManageInstitutionType());
+	model.addAttribute("manageinstitution", new ManageInstitution());
+	model.addAttribute("managejobtype", new ManageJobType());
+	
+		return "manage";
+	}
+
+
+
+	
+	
+	
 	
 	
 	

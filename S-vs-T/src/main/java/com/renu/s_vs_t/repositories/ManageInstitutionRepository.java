@@ -10,7 +10,10 @@ import org.springframework.data.repository.query.Param;
 import com.renu.s_vs_t.models.ManageInstitution;
 
 public interface ManageInstitutionRepository extends JpaRepository<ManageInstitution, Long>,JpaSpecificationExecutor<ManageInstitution>{
-	  //get by institution name
+	 //delete by id
+	public ManageInstitution getById(Long id);
+	
+	//get by institution name
 	public ManageInstitution getByInstitutionName(String institutionName);
 	
 	//find by category

@@ -45,7 +45,7 @@ setTimeout(function(){
 
 	$('.preLoader').fadeOut("slow");
 	
-},2000);
+},1000);
 
 }
 

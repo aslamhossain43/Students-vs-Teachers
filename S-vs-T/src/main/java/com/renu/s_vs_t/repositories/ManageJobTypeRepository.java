@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import com.renu.s_vs_t.models.ManageJobType;
 
 public interface ManageJobTypeRepository extends JpaRepository<ManageJobType, Long>,JpaSpecificationExecutor<ManageJobType>{
-
+public ManageJobType getById(Long id);
 }

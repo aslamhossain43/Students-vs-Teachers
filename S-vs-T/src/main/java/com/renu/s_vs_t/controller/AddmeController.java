@@ -276,27 +276,36 @@ public class AddmeController {
 	
 	
 	
-	@RequestMapping(value="/showUpdateWordByUser",method=RequestMethod.GET)
-	public String showUpdateWordByUser(@RequestParam("id") long id, Model model) {
-		LOGGER.info("From Class : AddmeController,method ,method : showUpdateWordByUser()");
+	@RequestMapping(value="/showUpdateWordForCouchingByUser",method=RequestMethod.GET)
+	public String showUpdateWordForCouchingByUser(@RequestParam("id") long id, Model model) {
+		LOGGER.info("From Class : AddmeController,method ,method : showUpdateWordForCouchingByUser()");
 		LOGGER.info("Getting id : "+id);
 		
 		model.addAttribute("id",id);
-		return "update-word";
+		return "update_word_for_couching";
 	}
 	
-	@RequestMapping(value="/update-word")
-	public String updateJobTypeByUser(@RequestParam("id") long id,@RequestParam("word") String word,
+	
+	@RequestMapping(value="/showUpdateWordForTutorByUser",method=RequestMethod.GET)
+	public String showUpdateWordForTutorByUser(@RequestParam("id") long id, Model model) {
+		LOGGER.info("From Class : AddmeController,method ,method : showUpdateWordForTutorByUser()");
+		LOGGER.info("Getting id : "+id);
+		
+		model.addAttribute("id",id);
+		return "update_word_for_tutor";
+	}
+	
+	@RequestMapping(value="/updateWordForCouching")
+	public String updateWordForCouching(@RequestParam("id") long id,@RequestParam("word") String word,
 			Model model) {
-		LOGGER.info("From Class : AddmeController,method : updateJobTypeByUser()");
+		LOGGER.info("From Class : AddmeController,method : updateWordForCouching()");
 		LOGGER.info("Getting id : "+id);
 		LOGGER.info("Getting word : "+word);
 		
 		
 		
 		ManageCouchingCenter manageCouchingCenter=manageCouchingCenterRepository.getById(id);
-		ManageTutor manageTutor=manageTutorRepository.getById(id);
-		if (manageCouchingCenter!=null) {
+		
 		
 			if (word.equals(manageCouchingCenter.getWord())) {
 				model.addAttribute("addcouching", manageCouchingCenter);
@@ -304,11 +313,27 @@ public class AddmeController {
 			}else {
 			model.addAttribute("message","Your word is wrong ! please enter a word which added during registration");	
 			model.addAttribute("id",id);
-			return "update-word";
+			return "update_word_for_couching";
 			
 			}
-		}
-		else {
+	
+		
+		
+		
+	}
+	
+	
+	
+	@RequestMapping(value="/updateWordForTutor")
+	public String updateWordForTutor(@RequestParam("id") long id,@RequestParam("word") String word,
+			Model model) {
+		LOGGER.info("From Class : AddmeController,method : updateWordForTutor()");
+		LOGGER.info("Getting id : "+id);
+		LOGGER.info("Getting word : "+word);
+		
+		
+		ManageTutor manageTutor=manageTutorRepository.getById(id);
+	
 			
 			if (word.equals(manageTutor.getWord())) {
 				model.addAttribute("addtutor", manageTutor);
@@ -316,10 +341,10 @@ public class AddmeController {
 			}else {
 			model.addAttribute("message","Your word is wrong ! please enter a word which added during registration");	
 			model.addAttribute("id",id);
-			return "update-word";
+			return "update_word_for_tutor";
 			
 			}
-		}
+		
 		
 		
 		
@@ -327,26 +352,29 @@ public class AddmeController {
 	
 	
 	
-	
-	
-	
-	@RequestMapping(value="/updateJobType",method=RequestMethod.GET)
-	public String showupdateJobType(@RequestParam("id") long id, Model model) {
-		LOGGER.info("From class AddmeController,method method : showupdateJobType() ");
+	@RequestMapping(value="/updateCouchingCenterByAdmin",method=RequestMethod.GET)
+	public String showUpdateCouchingCenterByAdmin(@RequestParam("id") long id, Model model) {
+		LOGGER.info("From class AddmeController, method : showUpdateCouchingCenterByAdmin() ");
 		ManageCouchingCenter manageCouchingCenter=manageCouchingCenterRepository.getById(id);
-		if (manageCouchingCenter!=null) {
+		
 			model.addAttribute("addcouching",manageCouchingCenter);
 			return "add-couching";
 			
-		}
-		else {
-			ManageTutor manageTutor=manageTutorRepository.getById(id);
-			model.addAttribute("addtutor",manageTutor);
-			return "add-tutor";
-		}
+		
 	}
 	
 	
+	
+
+	@RequestMapping(value="/updateTutorByAdmin",method=RequestMethod.GET)
+	public String showUpdateTutorByAdmin(@RequestParam("id") long id, Model model) {
+		LOGGER.info("From class AddmeController, method : showUpdateTutorByAdmin() ");
+		ManageTutor manageTutor=manageTutorRepository.getById(id);
+			model.addAttribute("addtutor",manageTutor);
+			return "add-tutor";
+			
+		
+	}
 	
 	
 	
