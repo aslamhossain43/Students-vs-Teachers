@@ -39,11 +39,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers("/","/showsignup","/signup/**","/loginSuccess","/loginError","/about/**"
 				,"/addme/**","/lookteachers/**","/manage/**","/addInstitutionType/**","/showManageInstitutionType/**",
-				"/addInstitutionType/**","/addInstitution/**","/addJobType/**","/showAddme/**")
+				"/addInstitutionType/**","/addInstitution/**","/addJobType/**","/show-email-word/**"
+				,"/send-email-word/**","/reset-password/**")
 				.permitAll();
 		http.authorizeRequests().antMatchers().hasAuthority("ADMIN");
 		http.authorizeRequests().antMatchers().hasAuthority("USER");
-		http.authorizeRequests().antMatchers().hasAnyAuthority("ADMIN","USER")
+		http.authorizeRequests().antMatchers("/showAddme/**").hasAnyAuthority("ADMIN","USER")
 		.anyRequest().authenticated().and()
 				.formLogin().loginPage("/login").successHandler(new CustomAuthenticationSuccess())
 				.failureHandler(new CustomAuthenticationFailure()).permitAll().and().logout().permitAll().and()
