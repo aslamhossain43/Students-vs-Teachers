@@ -251,9 +251,8 @@ if(table.length){
 						
 			  str+='<a href="/updateTutorByAdmin?id='+data+'" id="editTrauncate" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>';
                 
-						
-					str+='<a href="/deleteTutorByAdmin?id='+data+'" id="editTrauncate" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>';
-					return str;
+			  str+='<button id="editTrauncate" class="btn btn-primary tag_cnt btn btn-danger"  onclick="showModal('+data+')" type="button" value="1"><span class="glyphicon glyphicon-trash"></span></button>';
+						return str;
 					}if (userRole=='USER') {
 						  str+='<a href="/showUpdateWordForTutorByUser?id='+data+'" id="editTrauncate" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>';
 				             
@@ -419,9 +418,11 @@ if(table.length){
 	
 });
 } 
-
-
-
-
-
-
+/*modal*/
+function showModal(data)
+{
+   //you can do anything with data, or pass more data to this function. i set this data to modal header for example
+	 $('.tutorDeleteByAdmin').attr('href','/deleteTutorByAdmin?id='+data);
+	$("#myModal .tutorDeleteId").html(data)
+   $("#myModal").modal();
+}
