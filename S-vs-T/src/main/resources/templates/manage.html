@@ -23,27 +23,58 @@
 </div>
 </div>
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<!-- Modal for job type -->
+<div class="modal fade" id="myJobTypeModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+       <button type="button" class="close" data-dismiss="modal" 
+	        
+	        aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       <h4 id="modalTextCenter" class="modal-title modalTextCenter">Confirmation for deleting</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <h4 id="modalTextCenter">Do you want to delete id number </h4>
+        <h4 id="modalTextCenter" class="jobtypeDeleteId"></h4>
+          <h4 id="modalTextCenter">??? </h4>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" id="modalTextCenter"  class="btn btn-primary" data-dismiss="modal">Close</button>
+       
+       <a class="jobtypeDeleteByAdmin btn btn-primary" href="j"><span id="modalTextCenter">Delete</span></a>
+        
       </div>
     </div>
-
   </div>
 </div>
+<!-- End Modal -->
 
+
+<!-- Modal for institution -->
+<div class="modal fade" id="myInstitutionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+       <button type="button" class="close" data-dismiss="modal" 
+	        
+	        aria-label="Close"><span aria-hidden="true">&times;</span></button>
+       <h4 id="modalTextCenter" class="modal-title modalTextCenter">Confirmation for deleting</h4>
+      </div>
+      <div class="modal-body">
+        <h4 id="modalTextCenter">Do you want to delete id number </h4>
+        <h4 id="modalTextCenter" class="institutionDeleteId"></h4>
+          <h4 id="modalTextCenter">??? </h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="modalTextCenter"  class="btn btn-primary" data-dismiss="modal">Close</button>
+       
+       <a class="institutionDeleteByAdmin btn btn-primary" href="d"><span id="modalTextCenter">Delete</span></a>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Modal -->
 <br>
 
 <fieldset>
@@ -279,7 +310,7 @@ th:value="${manageinstitution.institutionName}" placeholder="Enter an institutio
 <thead>
 
 <tr>
-
+<th>ID</th>
 <th>Job types</th>
 <th>Common name</th>
 <th>Uploaded date</th>
@@ -324,6 +355,7 @@ th:value="${manageinstitution.institutionName}" placeholder="Enter an institutio
 <thead>
 
 <tr>
+<th>ID</th>
 <th>Institution types</th>
 <th>Institution names</th>
 <th>Uploaded date</th>

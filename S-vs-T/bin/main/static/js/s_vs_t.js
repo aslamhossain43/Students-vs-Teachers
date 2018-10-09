@@ -16,7 +16,9 @@ if(table.length){
 	  
   },
   columns : [
-	  
+	  {
+		data:'id'  
+	  },
 	 
 		 {
 			data:'iCode',
@@ -113,10 +115,9 @@ if(table.length){
 					if (userRole=='ADMIN') {
 						
 			  str+='<a href="/updateCouchingCenterByAdmin?id='+data+'" id="editTrauncate" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>';
-                
-						
-					str+='<a href="/deleteCouchingByAdmin?id='+data+'" id="editTrauncate" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>';
-					return str;
+			   
+			  str+='<button id="editTrauncate" class="btn btn-primary tag_cnt btn btn-danger"  onclick="showCouchingModal('+data+')" type="button" value="1"><span class="glyphicon glyphicon-trash"></span></button>';
+				return str;
 					}if (userRole=='USER') {
 						  str+='<a href="/showUpdateWordForCouchingByUser?id='+data+'" id="editTrauncate" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>';
 				             
@@ -158,7 +159,9 @@ if(table.length){
 	  
   },
   columns : [
-	  
+	  {
+			data:'id'  
+		  },
 	 
 		 {
 			data:'iCode',
@@ -251,7 +254,7 @@ if(table.length){
 						
 			  str+='<a href="/updateTutorByAdmin?id='+data+'" id="editTrauncate" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>';
                 
-			  str+='<button id="editTrauncate" class="btn btn-primary tag_cnt btn btn-danger"  onclick="showModal('+data+')" type="button" value="1"><span class="glyphicon glyphicon-trash"></span></button>';
+			  str+='<button id="editTrauncate" class="btn btn-primary tag_cnt btn btn-danger"  onclick="showTutorModal('+data+')" type="button" value="1"><span class="glyphicon glyphicon-trash"></span></button>';
 						return str;
 					}if (userRole=='USER') {
 						  str+='<a href="/showUpdateWordForTutorByUser?id='+data+'" id="editTrauncate" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>';
@@ -305,7 +308,9 @@ if(table.length){
 	  
   },
   columns : [
-	  
+	  {
+			data:'id'  
+		  },
 	 
 		
 	  {
@@ -334,10 +339,9 @@ if(table.length){
 		
 						
 			  str+='<a href="/editJobTypeByAdmin?id='+data+'" id="editTrauncateByAdmin" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>';
-                
-						
-					str+='<a href="/deleteJobTypeByAdmin?id='+data+'" id="editTrauncateByAdmin" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>';
-					return str;
+			    
+			  str+='<button id="editTrauncate" class="btn btn-primary tag_cnt btn btn-danger"  onclick="showJobTypeModal('+data+')" type="button" value="1"><span class="glyphicon glyphicon-trash"></span></button>';
+				return str;
 					
 			  
 		  }
@@ -372,7 +376,9 @@ if(table.length){
 	  
   },
   columns : [
-	  
+	  {
+			data:'id'  
+		  },
 	 
 		
 	  {
@@ -402,9 +408,8 @@ if(table.length){
 						
 			  str+='<a href="/editInstitutionByAdmin?id='+data+'" id="editTrauncateByAdmin" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>';
                 
-						
-					str+='<a href="/deleteInstitutionByAdmin?id='+data+'" id="editTrauncateByAdmin" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a>';
-					return str;
+			  str+='<button id="editTrauncate" class="btn btn-primary tag_cnt btn btn-danger"  onclick="showInstitutionModal('+data+')" type="button" value="1"><span class="glyphicon glyphicon-trash"></span></button>';
+				return str;
 					
 			  
 		  }
@@ -418,11 +423,43 @@ if(table.length){
 	
 });
 } 
-/*modal*/
-function showModal(data)
+/*bootstrap modal*/
+/*for tutor*/
+function showTutorModal(data)
 {
    //you can do anything with data, or pass more data to this function. i set this data to modal header for example
 	 $('.tutorDeleteByAdmin').attr('href','/deleteTutorByAdmin?id='+data);
 	$("#myModal .tutorDeleteId").html(data)
    $("#myModal").modal();
 }
+
+/*for couching*/
+function showCouchingModal(data)
+{
+   //you can do anything with data, or pass more data to this function. i set this data to modal header for example
+	 $('.couchingDeleteByAdmin').attr('href','/deleteCouchingByAdmin?id='+data);
+	$("#myModal .couchingDeleteId").html(data)
+   $("#myModal").modal();
+}
+
+/*for job type*/
+function showJobTypeModal(data)
+{
+   //you can do anything with data, or pass more data to this function. i set this data to modal header for example
+	 $('.jobtypeDeleteByAdmin').attr('href','/deleteJobTypeByAdmin?id='+data);
+	$("#myJobTypeModal .jobtypeDeleteId").html(data)
+   $("#myJobTypeModal").modal();
+}
+
+
+/*for institution*/
+function showInstitutionModal(data)
+{
+   //you can do anything with data, or pass more data to this function. i set this data to modal header for example
+	 $('.institutionDeleteByAdmin').attr('href','/deleteInstitutionByAdmin?id='+data);
+	$("#myInstitutionModal .institutionDeleteId").html(data)
+   $("#myInstitutionModal").modal();
+}
+
+
+
