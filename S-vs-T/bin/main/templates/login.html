@@ -46,7 +46,7 @@
 
 							<input type="email" class="form-control"  name="username" data-ng-model="username" required 
 							 id="email" placeholder="Enter Email" autocomplete="off">
-							 <p data-ng-show="myForm.username.$touched&&myForm.username.$invalid"><i>Valid email is required</i></p>
+							 <p id="validationTextColor" data-ng-show="myForm.username.$touched&&myForm.username.$invalid"><i>Valid email is required</i></p>
 
 
 						</div>
@@ -58,7 +58,7 @@
 						<div class="col-lg-8">
 							<input type="password" class="form-control"
 							 name="password" data-ng-model="password" required id="password"   placeholder="Enter Password"  autocomplete="off">
-                        <p data-ng-show="myForm.password.$touched&&myForm.password.$invalid"><i>Valid password is required</i></p>
+                        <p id="validationTextColor" data-ng-show="myForm.password.$touched&&myForm.password.$invalid"><i>Valid password is required</i></p>
                         						
 						</div>
 					</div>

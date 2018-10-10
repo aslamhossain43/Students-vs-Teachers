@@ -38,7 +38,7 @@
 <label for="firstname" class="col-sm-3 col-md-3 col-lg-3 control-label">First Name : </label>
 <div class="col-sm-7 col-md-7 col-lg-7">
 <input type="text" class="form-control" id="firstname" th:field="*{firstName}" data-ng-model="firstName" required placeholder=" Enter First Name" autocomplete="off">
- <p data-ng-show="userForm.firstName.$touched&&userForm.firstName.$invalid"><i>First name is required</i></p>
+ <p id="validationTextColor" data-ng-show="userForm.firstName.$touched&&userForm.firstName.$invalid"><i>First name is required</i></p>
 
 </div>
 </div>
@@ -47,7 +47,7 @@
 <label for="lastname" class="col-sm-3 col-md-3 col-lg-3 control-label">Last Name : </label>
 <div class="col-sm-7 col-md-7 col-lg-7">
 <input type="text" class="form-control" id="lastname" th:field="*{lastName}" data-ng-model="lastName" required placeholder=" Enter Last Name" autocomplete="off">
-<p data-ng-show="userForm.lastName.$touched&&userForm.lastName.$invalid"><i>Last name is required</i></p>
+<p id="validationTextColor" data-ng-show="userForm.lastName.$touched&&userForm.lastName.$invalid"><i>Last name is required</i></p>
 
 </div>
 </div>
@@ -56,7 +56,7 @@
 <label for="email" class="col-sm-3 col-md-3 col-lg-3 control-label">Email : </label>
 <div class="col-sm-7 col-md-7 col-lg-7">
 <input type="email" class="form-control" id="email" th:field="*{username}" data-ng-model="username" required placeholder=" Enter Email" autocomplete="off">
-<p data-ng-show="userForm.username.$touched&&userForm.username.$invalid"><i>Email is required</i></p>
+<p id="validationTextColor" data-ng-show="userForm.username.$touched&&userForm.username.$invalid"><i>Email is required</i></p>
 
 </div>
 </div>
@@ -66,7 +66,7 @@
 <label for="password" class="col-sm-3 col-md-3 col-lg-3 control-label">Password : </label>
 <div class="col-sm-7 col-md-7 col-lg-7">
 <input type="password" class="form-control" id="password" th:field="*{password}" data-ng-model="password" required placeholder=" Enter Password" autocomplete="off">
-<p data-ng-show="userForm.password.$touched&&userForm.password.$invalid"><i>Password is required</i></p>
+<p id="validationTextColor" data-ng-show="userForm.password.$touched&&userForm.password.$invalid"><i>Password is required</i></p>
 
 </div>
 </div>
@@ -77,7 +77,7 @@
 <label for="confirmpassword" class="col-sm-3 col-md-3 col-lg-3 control-label">Confirm Password</label>
 <div class="col-sm-7 col-md-7 col-lg-7">
 <input type="password" class="form-control" id="confirmpassword" th:field="*{confirmPassword}" data-ng-model="confirmPassword" required placeholder=" Enter Confirm Password" autocomplete="off">
-<p data-ng-show="userForm.confirmPassword.$touched&&userForm.confirmPassword.$invalid"><i>Confirm password is required</i></p>
+<p id="validationTextColor" data-ng-show="userForm.confirmPassword.$touched&&userForm.confirmPassword.$invalid"><i>Confirm password is required</i></p>
 
 </div>
 </div>
@@ -88,7 +88,7 @@
 <div class="col-sm-7 col-md-7 col-lg-7">
 <input type="text" class="form-control" id="word" th:field="*{word}" data-ng-model="word" required 
 placeholder=" Enter some characters(10-50) and mind it  for security " autocomplete="off">
-<p data-ng-show="userForm.word.$touched&&userForm.word.$invalid"><i>some characters(10-50) is required</i></p>
+<p id="validationTextColor" data-ng-show="userForm.word.$touched&&userForm.word.$invalid"><i>some characters(10-50) is required</i></p>
 <p th:if="${#fields.hasErrors('word')}" th:errors="*{word}"></p>
 
 </div>
@@ -98,7 +98,7 @@ placeholder=" Enter some characters(10-50) and mind it  for security " autocompl
 <label for="district" class="col-sm-3 col-md-3 col-lg-3 control-label">District : </label>
 <div class="col-sm-7 col-md-7 col-lg-7">
 <input type="text" class="form-control" id="district" th:field="*{district}" data-ng-model="district" required placeholder=" Enter Country Name" autocomplete="off">
-<p data-ng-show="userForm.district.$touched&&userForm.district.$invalid"><i>District is required</i></p>
+<p id="validationTextColor" data-ng-show="userForm.district.$touched&&userForm.district.$invalid"><i>District is required</i></p>
 
 </div>
 </div>
@@ -108,7 +108,7 @@ placeholder=" Enter some characters(10-50) and mind it  for security " autocompl
 <label for="detailaddress" class="col-sm-3 col-md-3 col-lg-3 control-label">Detail Address : </label>
 <div class="col-sm-7 col-md-7 col-lg-7">
 <textarea class="form-control" id="detailaddress" th:field="*{detailAddress}" data-ng-model="detailAddress" required placeholder=" Enter Detail Address" autocomplete="off"></textarea>
-<p data-ng-show="userForm.detailAddress.$touched&&userForm.detailAddress.$invalid"><i>Detail Address is required</i></p>
+<p id="validationTextColor" data-ng-show="userForm.detailAddress.$touched&&userForm.detailAddress.$invalid"><i>Detail Address is required</i></p>
 
 </div>
 </div>
@@ -124,7 +124,7 @@ placeholder=" Enter some characters(10-50) and mind it  for security " autocompl
 			<label class="checkbox-inline">
 				 <input type="checkbox" th:field="*{roles}" data-ng-model="roles" required value="USER" />User
 			</label>
-<p data-ng-show="userForm.roles.$touched&&userForm.roles.$invalid"><i>Role is required</i></p>
+<p id="validationTextColor" data-ng-show="userForm.roles.$touched&&userForm.roles.$invalid"><i>Role is required</i></p>
 		</div>
 		
 	</div> 	

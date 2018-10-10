@@ -31,7 +31,9 @@ letter-spacing:2px;
 word-spacing:3px;
 
 }
-
+#validationTextColor{
+color:red;
+}
 /*for angular js */
 input.ng-invalid{
 background-color:pink;

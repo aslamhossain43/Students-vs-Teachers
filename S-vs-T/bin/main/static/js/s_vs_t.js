@@ -17,7 +17,21 @@ if(table.length){
   },
   columns : [
 	  {
-		data:'id'  
+		  data:'id',
+		  mRender:function(data){
+			  				
+			  var str='';
+				var id=data;	
+		
+					if (userRole=='ADMIN') {
+							
+			  return id;
+			
+			  
+		  }else {
+			return str;
+		}
+	  }
 	  },
 	 
 		 {
@@ -159,8 +173,21 @@ if(table.length){
 	  
   },
   columns : [
-	  {
-			data:'id'  
+	  {  data:'id',
+		  mRender:function(data){
+			  				
+			  var str='';
+				var id=data;	
+		
+					if (userRole=='ADMIN') {
+							
+			  return id;
+			
+			  
+		  }else {
+			return str;
+		}
+	  }
 		  },
 	 
 		 {
