@@ -66,7 +66,7 @@ public class UserController {
 		return "login";
 	}
 
-	@RequestMapping(value = "/aaslamaadminssignup")
+	@RequestMapping(value = "/aasssllaamm")
 	public String adminRegistration(Model model) {
 		model.addAttribute("userform", new User());
 		model.addAttribute("title", "Registration");
