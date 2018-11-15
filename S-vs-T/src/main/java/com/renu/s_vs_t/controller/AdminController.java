@@ -1,6 +1,7 @@
 package com.renu.s_vs_t.controller;
 
 import java.io.File;
+import java.util.Collection;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -8,6 +9,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -63,6 +66,14 @@ public class AdminController {
 			@ModelAttribute("manageinstitution") ManageInstitution manageInstitution,
 			Model model) {
 		LOGGER.info("From class AdminController,method :  addJobType()");
+		//after adding to see data in manage page
+		model.addAttribute("title", "Manage");
+		model.addAttribute("manageinstitutiontype", new ManageInstitutionType());
+		model.addAttribute("manageinstitution", new ManageInstitution());
+		model.addAttribute("managejobtype", new ManageJobType());
+		model.addAttribute("jsonurladmin1", "/viewalljobtypes");
+		model.addAttribute("jsonurladmin2", "/viewallinstitution");
+		
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("message", "Your operation has not been completed !!!");
 			return "manage";
@@ -93,6 +104,13 @@ public class AdminController {
 			@ModelAttribute("manageinstitution") ManageInstitution manageInstitution,  @ModelAttribute("managejobtype")ManageJobType manageJobType,
 			Model model) {
 		LOGGER.info("From class AdminController,method :  addInstitutionType()");
+		//after adding to see data in manage page
+				model.addAttribute("title", "Manage");
+				model.addAttribute("manageinstitutiontype", new ManageInstitutionType());
+				model.addAttribute("manageinstitution", new ManageInstitution());
+				model.addAttribute("managejobtype", new ManageJobType());
+				model.addAttribute("jsonurladmin1", "/viewalljobtypes");
+				model.addAttribute("jsonurladmin2", "/viewallinstitution");
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("message", "Your operation has not been completed !!!");
 			return "manage";
@@ -115,6 +133,13 @@ public class AdminController {
 			@ModelAttribute("manageinstitutiontype") ManageInstitutionType manageInstitutionType, @ModelAttribute("managejobtype")ManageJobType manageJobType,
 			 Model model) {
 		LOGGER.info("From class AdminController,method :  addInstitution()");
+		//after adding to see data in manage page
+				model.addAttribute("title", "Manage");
+				model.addAttribute("manageinstitutiontype", new ManageInstitutionType());
+				model.addAttribute("manageinstitution", new ManageInstitution());
+				model.addAttribute("managejobtype", new ManageJobType());
+				model.addAttribute("jsonurladmin1", "/viewalljobtypes");
+				model.addAttribute("jsonurladmin2", "/viewallinstitution");
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("message", "Your operation has not been completed !!!");
 			return "manage";
@@ -145,6 +170,13 @@ public class AdminController {
 	@RequestMapping(value = "/deleteCouchingByAdmin")
 	public String deleteById(@RequestParam("id") long id, Model model) {
 		
+		model.addAttribute("jsonurl", "/viewallcouching");
+		 Collection<SimpleGrantedAuthority>authorities=(Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+			
+			String role=authorities.toString().replace("[","").replace("]","") ;
+			LOGGER.info("From class: AddmeController,method : viewByJobType(), authority : "+role);
+			model.addAttribute("role",role );
+			
 		ManageCouchingCenter manageCouchingCenter=manageCouchingCenterRepository.getById(id);
 		
 	
@@ -176,8 +208,12 @@ public class AdminController {
 	public String deleteByAdmin(@RequestParam("id") long id, Model model) {
 		ManageTutor manageTutor=manageTutorRepository.getById(id);
 		LOGGER.info("From class AdminController,method : deleteByAdmin() ");
-	
-		
+	      model.addAttribute("jsonurl","/viewalltutorByInstitutionName");
+	      Collection<SimpleGrantedAuthority>authorities=(Collection<SimpleGrantedAuthority>) SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+			
+			String role=authorities.toString().replace("[","").replace("]","") ;
+			LOGGER.info("From class: AddmeController,method : viewByJobType(), authority : "+role);
+			model.addAttribute("role",role );
 			String iCodeT=manageTutor.getiCode();
 			File iFile=new File(FileUploadUtility.IABS_PATH+iCodeT+".jpg");
 			
@@ -208,8 +244,12 @@ public class AdminController {
 		
 		ManageJobType manageJobType=manageJobTypeRepository.getById(id);
            model.addAttribute("managejobtype", manageJobType);
-       	model.addAttribute("manageinstitution",new ManageInstitution());
+         //after adding to see data in manage page
+       	model.addAttribute("title", "Manage");
        	model.addAttribute("manageinstitutiontype", new ManageInstitutionType());
+       	model.addAttribute("manageinstitution", new ManageInstitution());
+       	model.addAttribute("jsonurladmin1", "/viewalljobtypes");
+       	model.addAttribute("jsonurladmin2", "/viewallinstitution");
            return "manage";
 		
 	}
@@ -220,8 +260,12 @@ public class AdminController {
 		ManageInstitution manageInstitution=manageInstitutionRepository.getById(id);
 	
 			model.addAttribute("manageinstitution",manageInstitution);
-			model.addAttribute("managejobtype",new ManageJobType());
+			//after adding to see data in manage page
+			model.addAttribute("title", "Manage");
 			model.addAttribute("manageinstitutiontype", new ManageInstitutionType());
+			model.addAttribute("managejobtype", new ManageJobType());
+			model.addAttribute("jsonurladmin1", "/viewalljobtypes");
+			model.addAttribute("jsonurladmin2", "/viewallinstitution");
 			return "manage";
 		
 		
@@ -237,13 +281,17 @@ public class AdminController {
 
 	@RequestMapping(value = "/deleteJobTypeByAdmin")
 	public String deleteJobTypeAndInstitutionByAdmin(@RequestParam("id") long id, Model model) {
-		manageJobTypeRepository.deleteById(id);
-		model.addAttribute("title", "Manage");
+		LOGGER.info("From class AdminController,method :  deleteJobTypeAndInstitutionByAdmin()");
 		model.addAttribute("message",id+" number id from jobType has been deleted successfully !!!");
-		model.addAttribute("manageinstitutiontype", new ManageInstitutionType());
-		model.addAttribute("manageinstitution", new ManageInstitution());
-		model.addAttribute("managejobtype", new ManageJobType());
+		//after adding to see data in manage page
+				model.addAttribute("title", "Manage");
+				model.addAttribute("manageinstitutiontype", new ManageInstitutionType());
+				model.addAttribute("manageinstitution", new ManageInstitution());
+				model.addAttribute("managejobtype", new ManageJobType());
+				model.addAttribute("jsonurladmin1", "/viewalljobtypes");
+				model.addAttribute("jsonurladmin2", "/viewallinstitution");
 		
+		manageJobTypeRepository.deleteById(id);
 			return "manage";
 		}
 	
@@ -253,13 +301,18 @@ public class AdminController {
 	
 @RequestMapping(value = "/deleteInstitutionByAdmin")
 public String deleteAndInstitutionByAdmin(@RequestParam("id") long id, Model model) {
-	manageInstitutionRepository.deleteById(id);
-	model.addAttribute("title", "Manage");
+	LOGGER.info("From class AdminController,method :  deleteAndInstitutionByAdmin()");
 	model.addAttribute("message",id+" number id from institution has been deleted successfully !!!");
+	
+	//after adding to see data in manage page
+	model.addAttribute("title", "Manage");
 	model.addAttribute("manageinstitutiontype", new ManageInstitutionType());
 	model.addAttribute("manageinstitution", new ManageInstitution());
 	model.addAttribute("managejobtype", new ManageJobType());
+	model.addAttribute("jsonurladmin1", "/viewalljobtypes");
+	model.addAttribute("jsonurladmin2", "/viewallinstitution");
 	
+	manageInstitutionRepository.deleteById(id);
 		return "manage";
 	}
 

@@ -201,6 +201,9 @@ public class AddmeController {
 			manageCouchingCenterRepository.save(manageCouchingCenter);
 			manageCouchingCenter.setId(null);
 		} else {
+			ManageCouchingCenter getById=manageCouchingCenterRepository.getById(manageCouchingCenter.getId());
+			String getIcode=getById.getiCode();
+			manageCouchingCenter.setiCode(getIcode);
 			manageCouchingCenterRepository.save(manageCouchingCenter);
 
 		}
